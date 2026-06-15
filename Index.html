@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdmunHigh School - Mobile Responsive Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+            color: #1e2530;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Color Palette */
+        :root {
+            --primary-dark: #0f1e36; 
+            --accent-blue: #1e3a67;
+            --text-muted: #656e7b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        /* Header / Navigation */
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 35px; /* Spacing increased as requested */
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-dark);
+        }
+
+        .btn-contact {
+            border: 1.5px solid var(--primary-dark);
+            padding: 10px 24px; /* Added padding space for connect button */
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary-dark) !important;
+            transition: all 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background-color: var(--primary-dark);
+            color: var(--white) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1.1;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            color: var(--primary-dark);
+            line-height: 1.15;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 17px;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-decoration: none;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-blue);
+        }
+
+        .hero-image {
+            flex: 0.9;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(15, 30, 54, 0.1);
+        }
+
+        /* Features/Badges Section */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 20px 0 60px 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 35px;
+            flex: 1;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+        }
+
+        .feature-card .icon {
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: #f0f4f8;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* About Dual Layout Box */
+        .about-intro {
+            display: flex;
+            margin: 60px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+        }
+
+        .about-box-dark {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 60px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-box-dark h2 {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .about-text {
+            background-color: var(--white);
+            padding: 60px;
+            flex: 1.4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .link-more {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* Interactive Programs Layout */
+        .programs-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 80px 0;
+            gap: 60px;
+        }
+
+        .programs-left {
+            flex: 1.2;
+        }
+
+        .programs-left h2 {
+            font-size: 38px;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .program-list {
+            list-style: none;
+        }
+
+        .program-list li {
+            font-size: 20px;
+            padding: 16px 0;
+            color: #a0aec0;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .program-list li.active {
+            color: var(--primary-dark);
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-dark);
+        }
+
+        .programs-right-box {
+            flex: 0.8;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 50px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .programs-right-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #90cdf4;
+            margin-bottom: 15px;
+        }
+
+        /* Principal Spotlight */
+        .spotlight-section {
+            background-color: var(--white);
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spotlight-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .spotlight-img {
+            flex: 0.8;
+        }
+
+        .spotlight-img img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .spotlight-content {
+            flex: 1.2;
+        }
+
+        .quote-icon {
+            font-size: 45px;
+            color: var(--accent-blue);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .spotlight-content h3 {
+            font-size: 32px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        .spotlight-content p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: #94a3b8;
+            padding: 80px 0 30px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 50px;
+        }
+
+        .footer-container div {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .footer-info h3 {
+            color: var(--white);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        footer h4 {
+            color: var(--white);
+            margin-bottom: 22px;
+            font-size: 16px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 12px;
+        }
+
+        footer ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        footer ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer-policy a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+
+        /* =======================================================
+           MOBILE & TABLET RESPONSIVE MEDIA QUERIES (FIXES OVERLAP)
+           ======================================================= */
+        
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 40px 0;
+                gap: 30px;
+            }
+            .hero-content p {
+                margin: 0 auto 30px auto;
+            }
+            .features {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .about-intro {
+                flex-direction: column;
+            }
+            .programs-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .programs-right-box {
+                margin-top: 10px;
+            }
+            .spotlight-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px; /* Keeps clean space on smaller mobile screens */
+            }
+            nav ul li {
+                margin-left: 0;
+            }
+            .hero-content h1 {
+                font-size: 34px;
+            }
+            .about-box-dark, .about-text, .programs-right-box {
+                padding: 30px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar container">
+            <div class="logo">Edmun<span>High</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">About</a></li>
+                    <li><a href="#">Programs</a></li>
+                    <li><a href="#">Extracurriculars</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#" class="btn-contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <div class="hero-content">
+            <h1>Discover Your <br><span>Education</span> Potential</h1>
+            <p>Our school provides a vibrant and collaborative ecosystem where young students explore creativity and build future-ready skills together.</p>
+            <a href="#" class="btn-primary">Explore More &rarr;</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80" alt="EdmunHigh Happy School Students">
+        </div>
+    </section>
+
+    <section class="features container">
+        <div class="feature-card">
+            <div class="icon">🎓</div>
+            <h3>Academic Excellence</h3>
+            <p>Interactive conceptual grids designed to push critical capabilities in young dynamic minds.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔬</div>
+            <h3>Modern Labs</h3>
+            <p>Equipped with modern technical setups allowing students to research beyond core notebooks.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>Creative Tracks</h3>
+            <p>Nurturing inner skills through music, advanced digital art layouts, and sport teams.</p>
+        </div>
+    </section>
+
+    <section class="about-intro container">
+        <div class="about-box-dark">
+            <h2>Unleash student possibilities with us</h2>
+        </div>
+        <div class="about-text">
+            <p>By providing a balanced environment filled with support and modern resources, we allow kids to find their hidden strengths. We believe every child contains massive talent pools waiting to break out.</p>
+            <a href="#" class="link-more">Learn More &nbsp;↗</a>
+        </div>
+    </section>
+
+    <section class="programs-section container">
+        <div class="programs-left">
+            <h2>Student programs you can register here</h2>
+            <ul class="program-list">
+                <li class="active">&mdash; Junior School Core</li>
+                <li>STEM Primary Tracks</li>
+                <li>Visual Arts Modules</li>
+                <li>Junior Athletics Prep</li>
+            </ul>
+        </div>
+        <div class="programs-right-box">
+            <h4>Active Stream</h4>
+            <p>Our interactive primary curriculum focuses heavily on teamwork, basic scientific reasoning, and foundational math operations taught through gamified mediums.</p>
+        </div>
+    </section>
+
+    <section class="spotlight-section">
+        <div class="spotlight-container container">
+            <div class="spotlight-img">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="School Principal Office">
+            </div>
+            <div class="spotlight-content">
+                <div class="quote-icon">&#8220;</div>
+                <h3>Hello. Welcome to Edmun High School.</h3>
+                <p>We build pipelines that guide children into disciplined, analytical, and respectful global citizens. Our core campus is fully geared to handle dynamic individual development.</p>
+                <div class="author-info">
+                    <h5>Dr. Sarah Jenkins</h5>
+                    <span>Edmun High School Director</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container container">
+            <div class="footer-info">
+                <h3>EdmunHigh</h3>
+                <p>Building foundational pipelines for students globally. Empowering minds with structural excellence.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#">Academic Framework</a></li>
+                    <li><a href="#">Campus Core Setup</a></li>
+                    <li><a href="#">Careers Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-address">
+                <h4>Address</h4>
+                <p>1234 Education Lane, Learning City,<br>EDFD Corporate Block, States</p>
+                <p style="color: #60a5fa;">contact@edmunhigh.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 EdmunHigh Portfolio System. Cleaned and structured fully for responsive devices.</p>
+            <div class="footer-policy">
+                <a href="#">Privacy Core</a> | <a href="#">Terms & Compliance</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+              </html>
+
