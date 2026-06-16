@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdmunHigh School - Mobile Responsive Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>The Golden Fork - Interactive Luxury Dining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Reset & Base Styles */
+        /* =======================================================
+           1. CORE BASE & STRUCTURE
+           ======================================================= */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-gold: #c5a880;
+            --dark-bg: #0b0e14;
+            --card-bg: #131722;
+            --text-light: #f4f6f9;
+            --text-muted: #9aa0a6;
+            --white: #ffffff;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f6f9;
-            color: #1e2530;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -27,24 +39,46 @@
             margin: 0 auto;
         }
 
-        /* Color Palette */
-        :root {
-            --primary-dark: #0f1e36; 
-            --accent-blue: #1e3a67;
-            --text-muted: #656e7b;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-            --border-color: #e2e8f0;
+        /* =======================================================
+           2. LIVE SCROLL ANIMATIONS (STRENGTH & SPEED INCREASED)
+           ======================================================= */
+        /* Increased translation distance from 60px to 100px for more strength */
+        /* Adjusted duration to 0.5s with a powerful snappier cubic-bezier curve */
+        .hidden-down {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
         }
 
-        /* Header / Navigation */
+        .hidden-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .hidden-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        /* Active Class triggered via Intersection Observer */
+        .show-element {
+            opacity: 1 !important;
+            transform: translateY(0) translateX(0) !important;
+        }
+
+        /* =======================================================
+           3. NAVIGATION ARCHITECTURE
+           ======================================================= */
         header {
-            background-color: var(--white);
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(11, 14, 20, 0.96);
+            padding: 22px 0;
+            border-bottom: 1px solid #1e2330;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(12px);
         }
 
         .navbar {
@@ -54,21 +88,20 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
         }
 
-        .logo span {
-            font-weight: 300;
-        }
+        .logo span { color: var(--white); }
 
         nav ul {
             display: flex;
             list-style: none;
             align-items: center;
-            gap: 35px; /* Spacing increased as requested */
+            gap: 35px;
         }
 
         nav ul li a {
@@ -77,288 +110,316 @@
             font-size: 15px;
             font-weight: 500;
             transition: color 0.3s ease;
-            white-space: nowrap;
         }
 
         nav ul li a:hover, nav ul li a.active {
-            color: var(--primary-dark);
+            color: var(--primary-gold);
         }
 
-        .btn-contact {
-            border: 1.5px solid var(--primary-dark);
-            padding: 10px 24px; /* Added padding space for connect button */
+        .btn-book {
+            border: 1.5px solid var(--primary-gold);
+            padding: 10px 24px;
             border-radius: 4px;
             font-weight: 600;
-            color: var(--primary-dark) !important;
+            color: var(--primary-gold) !important;
             transition: all 0.3s ease;
         }
 
-        .btn-contact:hover {
-            background-color: var(--primary-dark);
-            color: var(--white) !important;
+        .btn-book:hover {
+            background-color: var(--primary-gold);
+            color: var(--dark-bg) !important;
         }
 
-        /* Hero Section */
+        /* =======================================================
+           4. HERO SECTION
+           ======================================================= */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 80px 0;
-            gap: 50px;
+            padding: 120px 0;
+            gap: 60px;
         }
 
-        .hero-content {
-            flex: 1.1;
-        }
+        .hero-content { flex: 1.1; }
 
         .hero-content h1 {
-            font-size: 52px;
-            color: var(--primary-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            color: var(--white);
             line-height: 1.15;
             font-weight: 700;
             margin-bottom: 24px;
-            letter-spacing: -1px;
         }
+
+        .hero-content h1 span { color: var(--primary-gold); }
 
         .hero-content p {
             color: var(--text-muted);
             font-size: 17px;
-            margin-bottom: 36px;
-            max-width: 480px;
+            margin-bottom: 38px;
+            max-width: 520px;
         }
 
         .btn-primary {
             display: inline-block;
-            background-color: var(--primary-dark);
-            color: var(--white);
+            background-color: var(--primary-gold);
+            color: var(--dark-bg);
             text-decoration: none;
-            padding: 14px 32px;
+            padding: 15px 38px;
             font-weight: 600;
             font-size: 15px;
-            border-radius: 2px;
-            transition: background-color 0.3s ease;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-blue);
+            background-color: #b3966f;
+            transform: translateY(-2px);
         }
 
-        .hero-image {
-            flex: 0.9;
-        }
+        .hero-image { flex: 0.9; }
 
         .hero-image img {
             width: 100%;
             height: auto;
-            max-height: 450px;
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 20px 40px rgba(15, 30, 54, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid #1e2330;
         }
 
-        /* Features/Badges Section */
+        /* =======================================================
+           5. VALUE BADGES
+           ======================================================= */
         .features {
             display: flex;
             justify-content: space-between;
             gap: 24px;
-            padding: 20px 0 60px 0;
+            padding: 40px 0 80px 0;
         }
 
         .feature-card {
-            background: var(--white);
-            padding: 35px;
+            background: var(--card-bg);
+            padding: 40px 30px;
             flex: 1;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+            border: 1px solid #1c212e;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            border-color: var(--primary-gold);
         }
 
         .feature-card .icon {
-            font-size: 28px;
-            margin-bottom: 20px;
-            background: #f0f4f8;
-            width: 55px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50px;
+            font-size: 36px;
+            margin-bottom: 18px;
+            color: var(--primary-gold);
         }
 
         .feature-card h3 {
-            font-size: 19px;
+            font-size: 21px;
             margin-bottom: 12px;
-            color: var(--primary-dark);
-            font-weight: 600;
+            color: var(--white);
         }
 
         .feature-card p {
             font-size: 14px;
             color: var(--text-muted);
-            line-height: 1.6;
         }
 
-        /* About Dual Layout Box */
-        .about-intro {
-            display: flex;
-            margin: 60px auto;
+        /* =======================================================
+           6. FOOD GRID (DOWN TO UP ANIMATION APP)
+           ======================================================= */
+        .menu-section { padding: 80px 0; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--primary-gold);
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            border: 1px solid #1c212e;
+            transition: all 0.3s ease;
         }
 
-        .about-box-dark {
-            background-color: var(--primary-dark);
+        .menu-item:hover {
+            box-shadow: 0 15px 30px rgba(197, 168, 128, 0.12);
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+
+        .menu-item-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .menu-item-info { padding: 30px; }
+
+        .menu-item-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .menu-item-title-row h3 {
+            font-size: 19px;
             color: var(--white);
-            padding: 60px;
-            flex: 1;
+        }
+
+        .menu-item-price {
+            color: var(--primary-gold);
+            font-weight: 700;
+            font-size: 19px;
+        }
+
+        .menu-item-info p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--primary-gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        /* =======================================================
+           7. CHEFS STORY SECTION
+           ======================================================= */
+        .chef-spotlight {
+            background-color: #080a0f;
+            padding: 100px 0;
+            border-top: 1px solid #1c212e;
+            border-bottom: 1px solid #1c212e;
+        }
+
+        .chef-row {
             display: flex;
             align-items: center;
+            gap: 60px;
         }
 
-        .about-box-dark h2 {
+        .chef-img-wrapper { flex: 0.9; }
+
+        .chef-img-wrapper img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-left: 3px solid var(--primary-gold);
+        }
+
+        .chef-details { flex: 1.1; }
+
+        .chef-details h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 36px;
-            font-weight: 600;
-            line-height: 1.3;
+            color: var(--white);
+            margin-bottom: 20px;
         }
 
-        .about-text {
-            background-color: var(--white);
-            padding: 60px;
-            flex: 1.4;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .about-text p {
+        .chef-details p {
             color: var(--text-muted);
             font-size: 16px;
             margin-bottom: 30px;
         }
 
-        .link-more {
-            color: var(--primary-dark);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-        }
+        /* =======================================================
+           8. BOOKING FORM
+           ======================================================= */
+        .booking-section { padding: 90px 0; }
 
-        /* Interactive Programs Layout */
-        .programs-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            padding: 80px 0;
-            gap: 60px;
-        }
-
-        .programs-left {
-            flex: 1.2;
-        }
-
-        .programs-left h2 {
-            font-size: 38px;
-            color: var(--primary-dark);
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .program-list {
-            list-style: none;
-        }
-
-        .program-list li {
-            font-size: 20px;
-            padding: 16px 0;
-            color: #a0aec0;
-            font-weight: 500;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .program-list li.active {
-            color: var(--primary-dark);
-            font-weight: 700;
-            border-bottom: 2px solid var(--primary-dark);
-        }
-
-        .programs-right-box {
-            flex: 0.8;
-            background-color: var(--primary-dark);
-            color: var(--white);
+        .booking-box {
+            background-color: var(--card-bg);
+            border: 1px solid #1c212e;
+            border-radius: 12px;
             padding: 50px;
-            border-radius: 6px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+        }
+
+        .booking-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .input-group {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 8px;
         }
 
-        .programs-right-box h4 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #90cdf4;
-            margin-bottom: 15px;
-        }
-
-        /* Principal Spotlight */
-        .spotlight-section {
-            background-color: var(--white);
-            padding: 80px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .spotlight-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .spotlight-img {
-            flex: 0.8;
-        }
-
-        .spotlight-img img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .spotlight-content {
-            flex: 1.2;
-        }
-
-        .quote-icon {
-            font-size: 45px;
-            color: var(--accent-blue);
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .spotlight-content h3 {
-            font-size: 32px;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-        }
-
-        .spotlight-content p {
+        .input-group label {
+            font-size: 13px;
             color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 25px;
+            text-transform: uppercase;
         }
 
-        /* Footer */
+        .input-group input, .input-group select {
+            background: #0b0e14;
+            border: 1px solid #1c212e;
+            padding: 12px 15px;
+            color: var(--white);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .btn-submit-form {
+            grid-column: 1 / -1;
+            background-color: var(--primary-gold);
+            color: var(--dark-bg);
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* =======================================================
+           9. FOOTER & BREAKPOINTS
+           ======================================================= */
         footer {
-            background-color: var(--primary-dark);
-            color: #94a3b8;
-            padding: 80px 0 30px 0;
+            background-color: #05070a;
+            padding: 60px 0 30px 0;
+            border-top: 1px solid #1c212e;
         }
 
         .footer-container {
@@ -366,121 +427,33 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 40px;
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 50px;
-        }
-
-        .footer-container div {
-            flex: 1;
-            min-width: 220px;
-        }
-
-        .footer-info h3 {
-            color: var(--white);
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        footer h4 {
-            color: var(--white);
-            margin-bottom: 22px;
-            font-size: 16px;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer ul li {
-            margin-bottom: 12px;
-        }
-
-        footer ul li a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        footer ul li a:hover {
-            color: var(--white);
         }
 
         .footer-bottom {
             padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #11151f;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             font-size: 13px;
+            color: var(--text-muted);
         }
 
-        .footer-policy a {
-            color: #94a3b8;
-            text-decoration: none;
-            margin: 0 8px;
-        }
-
-
-        /* =======================================================
-           MOBILE & TABLET RESPONSIVE MEDIA QUERIES (FIXES OVERLAP)
-           ======================================================= */
-        
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column-reverse;
                 text-align: center;
-                padding: 40px 0;
-                gap: 30px;
+                padding: 70px 0;
             }
-            .hero-content p {
-                margin: 0 auto 30px auto;
-            }
-            .features {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .about-intro {
-                flex-direction: column;
-            }
-            .programs-section {
-                flex-direction: column;
-                gap: 30px;
-            }
-            .programs-right-box {
-                margin-top: 10px;
-            }
-            .spotlight-container {
-                flex-direction: column;
-                text-align: center;
-            }
+            .features { flex-direction: column; gap: 20px; }
+            .chef-row { flex-direction: column; text-align: center; }
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 15px 0;
-            }
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px; /* Keeps clean space on smaller mobile screens */
-            }
-            nav ul li {
-                margin-left: 0;
-            }
-            .hero-content h1 {
-                font-size: 34px;
-            }
-            .about-box-dark, .about-text, .programs-right-box {
-                padding: 30px;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
+            .navbar { flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .booking-box { padding: 30px 20px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
@@ -488,120 +461,203 @@
 
     <header>
         <div class="navbar container">
-            <div class="logo">Edmun<span>High</span></div>
+            <div class="logo">The Golden<span>Fork</span></div>
             <nav>
                 <ul>
-                    <li><a href="#" class="active">About</a></li>
-                    <li><a href="#">Programs</a></li>
-                    <li><a href="#">Extracurriculars</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#" class="btn-contact">Contact Us</a></li>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#" class="btn-book">Book A Table</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <section class="hero container">
-        <div class="hero-content">
-            <h1>Discover Your <br><span>Education</span> Potential</h1>
-            <p>Our school provides a vibrant and collaborative ecosystem where young students explore creativity and build future-ready skills together.</p>
-            <a href="#" class="btn-primary">Explore More &rarr;</a>
+        <div class="hero-content hidden-left">
+            <h1>Crafting Premium <span>Culinary</span> Experiences</h1>
+            <p>Welcome to The Golden Fork, where ancient royal recipes meet modern culinary arts to produce pure magic on your plate.</p>
+            <a href="#" class="btn-primary">Explore Our Menu &rarr;</a>
         </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80" alt="EdmunHigh Happy School Students">
+        <div class="hero-image hidden-right">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Exquisite Premium Food">
         </div>
     </section>
 
-    <section class="features container">
+    <section class="features container hidden-down">
         <div class="feature-card">
-            <div class="icon">🎓</div>
-            <h3>Academic Excellence</h3>
-            <p>Interactive conceptual grids designed to push critical capabilities in young dynamic minds.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🔬</div>
-            <h3>Modern Labs</h3>
-            <p>Equipped with modern technical setups allowing students to research beyond core notebooks.</p>
+            <div class="icon">🧑‍🍳</div>
+            <h3>Master Chefs</h3>
+            <p>Our kitchen operations are systematically run by globally certified culinary specialists.</p>
         </div>
         <div class="feature-card">
-            <div class="icon">🎨</div>
-            <h3>Creative Tracks</h3>
-            <p>Nurturing inner skills through music, advanced digital art layouts, and sport teams.</p>
+            <div class="icon">🌿</div>
+            <h3>Pure Organic</h3>
+            <p>We strictly source clean, farm-fresh ingredients to guarantee organic health standards.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">✨</div>
+            <h3>Royal Ambience</h3>
+            <p>A deeply sophisticated luxury seating layout tailored for premium family dinners.</p>
         </div>
     </section>
 
-    <section class="about-intro container">
-        <div class="about-box-dark">
-            <h2>Unleash student possibilities with us</h2>
+    <section class="menu-section container">
+        <div class="section-header hidden-down">
+            <p>Gourmet Selection</p>
+            <h2>From Our Signature Menu</h2>
         </div>
-        <div class="about-text">
-            <p>By providing a balanced environment filled with support and modern resources, we allow kids to find their hidden strengths. We believe every child contains massive talent pools waiting to break out.</p>
-            <a href="#" class="link-more">Learn More &nbsp;↗</a>
-        </div>
-    </section>
-
-    <section class="programs-section container">
-        <div class="programs-left">
-            <h2>Student programs you can register here</h2>
-            <ul class="program-list">
-                <li class="active">&mdash; Junior School Core</li>
-                <li>STEM Primary Tracks</li>
-                <li>Visual Arts Modules</li>
-                <li>Junior Athletics Prep</li>
-            </ul>
-        </div>
-        <div class="programs-right-box">
-            <h4>Active Stream</h4>
-            <p>Our interactive primary curriculum focuses heavily on teamwork, basic scientific reasoning, and foundational math operations taught through gamified mediums.</p>
-        </div>
-    </section>
-
-    <section class="spotlight-section">
-        <div class="spotlight-container container">
-            <div class="spotlight-img">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="School Principal Office">
+        
+        <div class="menu-grid">
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80" alt="Pizza" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Truffle Sourdough Pizza</h3>
+                        <span class="menu-item-price">$18.50</span>
+                    </div>
+                    <p>Fresh mozzarella, wild autumn mushrooms, shaved white truffle oil, and a premium crusted base.</p>
+                    <span class="badge-tag">Chef's Pick</span>
+                </div>
             </div>
-            <div class="spotlight-content">
-                <div class="quote-icon">&#8220;</div>
-                <h3>Hello. Welcome to Edmun High School.</h3>
-                <p>We build pipelines that guide children into disciplined, analytical, and respectful global citizens. Our core campus is fully geared to handle dynamic individual development.</p>
-                <div class="author-info">
-                    <h5>Dr. Sarah Jenkins</h5>
-                    <span>Edmun High School Director</span>
+
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" alt="Burger" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Angus Gold Craft Burger</h3>
+                        <span class="menu-item-price">$14.99</span>
+                    </div>
+                    <p>Prime aged angus beef patty, multi-layered smoked cheddar, house special sauce inside hot brioche.</p>
+                    <span class="badge-tag">Best Seller</span>
+                </div>
+            </div>
+
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Dessert" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Glazed Berry Fondant</h3>
+                        <span class="menu-item-price">$9.25</span>
+                    </div>
+                    <p>Artisanal hot dark chocolate core crust drizzled completely with fresh wild raspberries.</p>
+                    <span class="badge-tag">Organic Dessert</span>
+                </div>
+            </div>
+
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=500&q=80" alt="Pasta" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Spaghetti Arrabbiata</h3>
+                        <span class="menu-item-price">$16.40</span>
+                    </div>
+                    <p>Rich spicy tomato garlic broth, fresh prawns, ocean mussels, and premium Italian herbs.</p>
+                    <span class="badge-tag">Spicy Spice</span>
+                </div>
+            </div>
+
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=500&q=80" alt="Steak" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Wagyu Sirloin Steak</h3>
+                        <span class="menu-item-price">$45.00</span>
+                    </div>
+                    <p>Aged Japanese Wagyu sirloin grilled on lava stones, served with rosemary butter lines.</p>
+                    <span class="badge-tag">Premium Rare</span>
+                </div>
+            </div>
+
+            <div class="menu-item hidden-down">
+                <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=500&q=80" alt="Drink" class="menu-item-img">
+                <div class="menu-item-info">
+                    <div class="menu-item-title-row">
+                        <h3>Mint Infused Mocktail</h3>
+                        <span class="menu-item-price">$7.50</span>
+                    </div>
+                    <p>Crushed organic spearmint, lime chunks, sparkle soda water, and cold botanical extract syrup.</p>
+                    <span class="badge-tag">Refreshing</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-container container">
-            <div class="footer-info">
-                <h3>EdmunHigh</h3>
-                <p>Building foundational pipelines for students globally. Empowering minds with structural excellence.</p>
+    <section class="chef-spotlight">
+        <div class="chef-row container">
+            <div class="chef-img-wrapper hidden-left">
+                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80" alt="Executive Chef Portrait">
             </div>
-            <div class="footer-links">
-                <h4>Links</h4>
-                <ul>
-                    <li><a href="#">Academic Framework</a></li>
-                    <li><a href="#">Campus Core Setup</a></li>
-                    <li><a href="#">Careers Portal</a></li>
-                </ul>
-            </div>
-            <div class="footer-address">
-                <h4>Address</h4>
-                <p>1234 Education Lane, Learning City,<br>EDFD Corporate Block, States</p>
-                <p style="color: #60a5fa;">contact@edmunhigh.edu</p>
+            <div class="chef-details hidden-right">
+                <h3>Cooking is an Art, Eating is a Passion.</h3>
+                <p>At The Golden Fork, we don't just assemble standard plates. We rigorously research ingredient combinations, maintain distinct heat points, and honor legacy texture notes to create culinary masterpieces.</p>
+                <div>
+                    <h5 style="color: var(--white); font-size: 18px;">Chef Marcus Vance</h5>
+                    <span style="color: var(--primary-gold); font-size: 13px;">Executive Kitchen Director</span>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom container">
-            <p>&copy; 2026 EdmunHigh Portfolio System. Cleaned and structured fully for responsive devices.</p>
-            <div class="footer-policy">
-                <a href="#">Privacy Core</a> | <a href="#">Terms & Compliance</a>
+    </section>
+
+    <section class="booking-section container hidden-down">
+        <div class="booking-box">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <p>Online Booking</p>
+                <h2 style="font-size: 34px;">Reserve Your Luxury Seating</h2>
             </div>
+            <form onsubmit="event.preventDefault(); alert('Table Reserved Successfully!');">
+                <div class="booking-form-grid">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Guests Count</label>
+                        <select required>
+                            <option>2 Persons</option>
+                            <option>4 Persons</option>
+                            <option>6 Persons</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Date Selection</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Dining Hour</label>
+                        <input type="time" required>
+                    </div>
+                    <button type="submit" class="btn-submit-form">Confirm Live Seating Arrangement</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 The Golden Fork. All components optimized with snappy scroll-driven micro-interactions.</p>
         </div>
     </footer>
 
-</body>
-              </html>
+    <script>
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.12 // Trigger animation when 12% enters viewport
+        };
 
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-element');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const itemsToAnimate = document.querySelectorAll('.hidden-down, .hidden-left, .hidden-right');
+        itemsToAnimate.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
